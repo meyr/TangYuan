@@ -1,6 +1,5 @@
 package net.mshome.fyon_linux.tangyuan;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,10 +9,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
+
+public class MainActivity
+        extends AppCompatActivity
+        implements ActionBar.TabListener ,
+        OrderFragment.OrderListener{
 
     AppSectionsPagerAdapter mAppSectionsPagerAdapter;
-    ViewPager mViewPager;
+    CustomViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         // Specify that we will be displaying tabs in the action bar.
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = (CustomViewPager) findViewById(R.id.pager);
+        mViewPager.setPagingEnabled(false);
         mViewPager.setAdapter(mAppSectionsPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -72,24 +76,33 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     }
 
-    public static class AppSectionsPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public void addOrder(String name, String pic) {
+        mAppSectionsPagerAdapter.addOrder(name,pic);
+    }
+
+    public static class AppSectionsPagerAdapter
+            extends FragmentPagerAdapter
+            implements OrderFragment.OrderListener{
 
         String pageTitle[]={"ToDo","Order","Static"};
         public AppSectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
+        Fragment tab1,tab2,tab3;
 
         @Override
         public Fragment getItem(int i) {
             switch (i) {
                 case 0:
-                    // The first section of the app is the most interesting -- it offers
-                    // a launchpad into the other demonstrations in this example application.
-                    return new ToDoFragment();
+                    tab1 = new ToDoFragment();
+                    return tab1;
                 case 1:
-                    return new OrderFragment();
+                    tab2 = new OrderFragment();
+                    return tab2;
                 case 2:
-                    return new StaticFragment();
+                    tab3 = new StaticFragment();
+                    return tab3;
                 default:
                     return new DummyFragment();
             }
@@ -105,5 +118,14 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         public CharSequence getPageTitle(int position) {
             return pageTitle[position];
         }
+
+        @Override
+        public void addOrder(String name, String pic) {
+            if(tab1 != null){
+                ((ToDoFragment)tab1).addOrder(name,pic);
+            }
+
+        }
     }
+
 }

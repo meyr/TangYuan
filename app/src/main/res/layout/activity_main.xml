@@ -10,8 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="net.mshome.fyon_linux.tangyuan.MainActivity">
 
-    <android.support.v4.view.ViewPager
+    <net.mshome.fyon_linux.tangyuan.CustomViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pager"></android.support.v4.view.ViewPager>
+        android:id="@+id/pager"></net.mshome.fyon_linux.tangyuan.CustomViewPager>
 </RelativeLayout>
