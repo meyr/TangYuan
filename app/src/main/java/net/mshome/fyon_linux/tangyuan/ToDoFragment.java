@@ -22,8 +22,6 @@ public class ToDoFragment
     private RecyclerView mRecyclerView;
     private MyAdapter myAdapter;
     private ArrayList<Actor> actors = new ArrayList<>();
-    private String[] names = { "朱茵", "张柏芝", "张敏", "巩俐", "黄圣依", "赵薇", "莫文蔚", "如花" };
-    private String[] pics = { "p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8" };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,10 +90,7 @@ public class ToDoFragment
         // restore arraylist
         if(savedInstanceState != null){
             actors = savedInstanceState.getParcelableArrayList("ACTORS");
-        }else{
-            actors.add(new Actor("朱茵","p1"));
         }
-
     }
 
     @Override
@@ -105,11 +100,10 @@ public class ToDoFragment
     }
 
     @Override
-    public void addOrder(String name, String pic){
-        if (myAdapter.getItemCount() != names.length) {
-            actors.add(new Actor(names[myAdapter.getItemCount()], pics[myAdapter.getItemCount()]));
-            mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
+    public void addOrder(Actor actor){
+            actors.add(actor);
+            //actors.add(new Actor(names[myAdapter.getItemCount()], pics[myAdapter.getItemCount()]));
+            //mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
             myAdapter.notifyDataSetChanged();
-        }
     }
 }

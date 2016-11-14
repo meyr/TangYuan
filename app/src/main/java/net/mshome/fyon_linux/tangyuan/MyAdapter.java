@@ -1,6 +1,9 @@
 package net.mshome.fyon_linux.tangyuan;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +21,6 @@ public class MyAdapter
 {
 
     private List<Actor> actors;
-
     private Context mContext;
 
     public MyAdapter(Context context , List<Actor> actors)
@@ -40,7 +42,14 @@ public class MyAdapter
     {
         // 给ViewHolder设置元素
         Actor p = actors.get(i);
-        viewHolder.mTextView.setText(p.name);
+        if(p.inout) {
+            viewHolder.mTextView.setText("內");
+            viewHolder.mCardView.setBackgroundColor(Color.WHITE);
+        }
+        else {
+            viewHolder.mTextView.setText("外");
+            viewHolder.mCardView.setBackgroundColor(Color.YELLOW);
+        }
 //        viewHolder.mImageView.setImageDrawable(mContext.getDrawable(p.getImageResourceId(mContext)));
     }
 
@@ -56,14 +65,16 @@ public class MyAdapter
         extends RecyclerView.ViewHolder
     {
         public TextView mTextView;
+        public CardView mCardView;
 
-        public ImageView mImageView;
+        //public ImageView mImageView;
 
         public ViewHolder( View v )
         {
             super(v);
             mTextView = (TextView) v.findViewById(R.id.name);
-            mImageView = (ImageView) v.findViewById(R.id.pic);
+            mCardView = (CardView) v.findViewById(R.id.cardview);
+           // mImageView = (ImageView) v.findViewById(R.id.pic);
         }
     }
 }

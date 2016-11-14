@@ -77,8 +77,8 @@ public class MainActivity
     }
 
     @Override
-    public void addOrder(String name, String pic) {
-        mAppSectionsPagerAdapter.addOrder(name,pic);
+    public void addOrder(Actor actor) {
+        mAppSectionsPagerAdapter.addOrder(actor);
     }
 
     public static class AppSectionsPagerAdapter
@@ -120,9 +120,9 @@ public class MainActivity
         }
 
         @Override
-        public void addOrder(String name, String pic) {
+        public void addOrder(Actor actor) {
             if(tab1 != null){
-                ((ToDoFragment)tab1).addOrder(name,pic);
+                ((ToDoFragment)tab1).addOrder(actor);
             }
 
         }

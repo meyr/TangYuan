@@ -11,13 +11,11 @@ public class Actor implements Parcelable
 {
     String name;
     String picName;
+    boolean inout;
 
-    public Actor(String name, String picName)
-    {
-        this.name = name;
-        this.picName = picName;
-    }
+    public Actor(){};
 
+    public void setInout(boolean inout){this.inout = inout;}
 
     protected Actor(Parcel in) {
         name = in.readString();
