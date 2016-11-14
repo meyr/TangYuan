@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
 
 
 public class MainActivity
@@ -85,11 +86,13 @@ public class MainActivity
             extends FragmentPagerAdapter
             implements OrderFragment.OrderListener{
 
-        String pageTitle[]={"ToDo","Order","Static"};
+        String pageTitle[]={"清單","點菜","統計"};
         public AppSectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-        Fragment tab1,tab2,tab3;
+        public static Fragment tab1,tab2,tab3;
+        Fragment[] fragments = {new Fragment(),new Fragment(),new Fragment()};
+
 
         @Override
         public Fragment getItem(int i) {
@@ -119,10 +122,17 @@ public class MainActivity
             return pageTitle[position];
         }
 
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Fragment fragment = (Fragment) super.instantiateItem(container, position);
+            fragments[position] = fragment;
+            return fragment;
+        }
         @Override
         public void addOrder(Actor actor) {
-            if(tab1 != null){
-                ((ToDoFragment)tab1).addOrder(actor);
+            if(fragments[0] != null){
+                ((ToDoFragment)fragments[0]).addOrder(actor);
             }
 
         }

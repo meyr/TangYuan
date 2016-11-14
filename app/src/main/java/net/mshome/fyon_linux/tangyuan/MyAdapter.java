@@ -50,6 +50,22 @@ public class MyAdapter
             viewHolder.mTextView.setText("外");
             viewHolder.mCardView.setBackgroundColor(Color.YELLOW);
         }
+
+        if(p.num_big_sian != 0 || p.num_small_sian != 0)
+        {
+            String tmp = "鹹湯圓　　";
+            if (p.num_big_sian != 0) {
+                tmp += "大　" + p.num_big_sian + "  ";
+                if (p.num_small_sian != 0)
+                    tmp += "小　" + p.num_small_sian;
+            }else{
+                if (p.num_small_sian != 0) {
+                    tmp += "            小　" + p.num_small_sian;
+                }
+            }
+            viewHolder.mSian.setText(tmp);
+        }
+
 //        viewHolder.mImageView.setImageDrawable(mContext.getDrawable(p.getImageResourceId(mContext)));
     }
 
@@ -64,7 +80,7 @@ public class MyAdapter
     public static class ViewHolder
         extends RecyclerView.ViewHolder
     {
-        public TextView mTextView;
+        public TextView mTextView,mSian;
         public CardView mCardView;
 
         //public ImageView mImageView;
@@ -74,6 +90,7 @@ public class MyAdapter
             super(v);
             mTextView = (TextView) v.findViewById(R.id.name);
             mCardView = (CardView) v.findViewById(R.id.cardview);
+            mSian = (TextView) v.findViewById(R.id.sian);
            // mImageView = (ImageView) v.findViewById(R.id.pic);
         }
     }

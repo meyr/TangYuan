@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TangYuan</string>
+    <string name="indoor_chinese">內用</string>
+    <string name="takeout_chinese">外帶</string>
 </resources>
