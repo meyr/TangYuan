@@ -12,7 +12,7 @@ public class Actor implements Parcelable
     String name;
     String picName;
     boolean inout;
-    int num_big_sian, num_small_sian;
+    int num_big_sian, num_small_sian,num_nama_sian;
 
     public Actor(){};
 
@@ -23,10 +23,11 @@ public class Actor implements Parcelable
         picName = in.readString();
     }
 
-    public void setSian(int big, int small)
+    public void setSian(int big, int small, int nama)
     {
         this.num_big_sian = big;
         this.num_small_sian = small;
+        this.num_nama_sian = nama;
     }
 
     public static final Creator<Actor> CREATOR = new Creator<Actor>() {

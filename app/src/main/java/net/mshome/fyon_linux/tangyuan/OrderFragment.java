@@ -19,8 +19,11 @@ import org.w3c.dom.Text;
 public class OrderFragment extends Fragment {
     OrderListener activityCallback;
     RadioGroup mRG;
-    TextView sian_big_num, sian_small_num;
-    Button sian_big_pls,sian_big_mns, sian_small_pls, sian_small_mns;
+    TextView sian_big_num, sian_small_num, totalprice, sian_nama_num;
+    Button sian_big_pls,sian_big_mns, sian_small_pls, sian_small_mns, sian_nama_pls, sian_nama_mns;
+    private int sian_big_price = 50;
+    private int sian_small_price = 40;
+    private int sian_nama_price = 130;
 
     public interface OrderListener{
         public void addOrder(Actor actor);
@@ -32,6 +35,8 @@ public class OrderFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_order, container, false);
         Button addOrderBtn = (Button)rootView.findViewById(R.id.addOrder);
         mRG = (RadioGroup) rootView.findViewById(R.id.inout);
+        totalprice = (TextView) rootView.findViewById(R.id.totalprice);
+        sian_nama_num = (TextView) rootView.findViewById(R.id.sian_nama_num);
         addOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,9 +46,12 @@ public class OrderFragment extends Fragment {
                     act.setInout(true);
                 int num_big_sian = Integer.parseInt(sian_big_num.getText().toString());
                 int num_small_sian = Integer.parseInt(sian_small_num.getText().toString());
-                act.setSian(num_big_sian,num_small_sian);
+                int num_nama_sian = Integer.parseInt(sian_nama_num.getText().toString());
+                act.setSian(num_big_sian,num_small_sian,num_nama_sian);
                 sian_big_num.setText("0");
                 sian_small_num.setText("0");
+                totalprice.setText("0");
+                sian_nama_num.setText("0");
                 activityCallback.addOrder(act);
             }
         });
@@ -54,8 +62,11 @@ public class OrderFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int num = Integer.parseInt(sian_big_num.getText().toString());
+                int total = Integer.parseInt(totalprice.getText().toString());
                 num++;
+                total += sian_big_price;
                 sian_big_num.setText(Integer.toString(num));
+                totalprice.setText(Integer.toString(total));
             }
         });
         sian_big_mns = (Button) rootView.findViewById(R.id.sian_big_mns_btn);
@@ -63,10 +74,14 @@ public class OrderFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int num = Integer.parseInt(sian_big_num.getText().toString());
+                int total = Integer.parseInt(totalprice.getText().toString());
                 num--;
                 if(num < 0)
                     num = 0;
+                else
+                    total -= sian_big_price;
                 sian_big_num.setText(Integer.toString(num));
+                totalprice.setText(Integer.toString(total));
             }
         });
 
@@ -75,8 +90,11 @@ public class OrderFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int num = Integer.parseInt(sian_small_num.getText().toString());
+                int total = Integer.parseInt(totalprice.getText().toString());
                 num++;
+                total += sian_small_price;
                 sian_small_num.setText(Integer.toString(num));
+                totalprice.setText(Integer.toString(total));
             }
         });
         sian_small_mns = (Button) rootView.findViewById(R.id.sian_small_mns_btn);
@@ -84,10 +102,41 @@ public class OrderFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int num = Integer.parseInt(sian_small_num.getText().toString());
+                int total = Integer.parseInt(totalprice.getText().toString());
                 num--;
                 if(num < 0)
                     num = 0;
+                else
+                    total -= sian_small_price;
                 sian_small_num.setText(Integer.toString(num));
+                totalprice.setText(Integer.toString(total));
+            }
+        });
+        sian_nama_pls = (Button) rootView.findViewById(R.id.sian_nama_pls_btn);
+        sian_nama_pls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int num = Integer.parseInt(sian_nama_num.getText().toString());
+                int total = Integer.parseInt(totalprice.getText().toString());
+                num++;
+                total += sian_nama_price;
+                sian_nama_num.setText(Integer.toString(num));
+                totalprice.setText(Integer.toString(total));
+            }
+        });
+        sian_nama_mns = (Button) rootView.findViewById(R.id.sian_nama_mns_btn);
+        sian_nama_mns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int num = Integer.parseInt(sian_nama_num.getText().toString());
+                int total = Integer.parseInt(totalprice.getText().toString());
+                num--;
+                if(num < 0)
+                    num = 0;
+                else
+                    total -= sian_nama_price;
+                sian_nama_num.setText(Integer.toString(num));
+                totalprice.setText(Integer.toString(total));
             }
         });
         return rootView;

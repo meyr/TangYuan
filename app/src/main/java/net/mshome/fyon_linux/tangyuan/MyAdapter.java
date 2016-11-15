@@ -5,12 +5,14 @@ import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.nio.Buffer;
 import java.util.List;
 
 /**
@@ -51,19 +53,35 @@ public class MyAdapter
             viewHolder.mCardView.setBackgroundColor(Color.YELLOW);
         }
 
-        if(p.num_big_sian != 0 || p.num_small_sian != 0)
+        if(p.num_big_sian != 0 || p.num_small_sian != 0 || p.num_nama_sian != 0)
         {
-            String tmp = "鹹湯圓　　";
-            if (p.num_big_sian != 0) {
-                tmp += "大　" + p.num_big_sian + "  ";
-                if (p.num_small_sian != 0)
-                    tmp += "小　" + p.num_small_sian;
-            }else{
-                if (p.num_small_sian != 0) {
-                    tmp += "            小　" + p.num_small_sian;
-                }
-            }
-            viewHolder.mSian.setText(tmp);
+            String src = "鹹湯圓     ";
+            if (p.num_big_sian != 0)
+                src += String.format("%-2s  大", p.num_big_sian);
+            else
+                src += String.format("           ");
+
+            if (p.num_small_sian != 0)
+                  src += String.format("  %-2s  小",p.num_small_sian);
+            else
+                  src += String.format("        ");
+
+            if (p.num_nama_sian != 0)
+                src += String.format("  %-2s  盒",p.num_nama_sian);
+            else
+                src += String.format("        ");
+
+//            String src = "鹹湯圓     ";
+//            if (p.num_big_sian != 0) {
+//                src += String.format("%-2s  大",p.num_big_sian);
+//                if (p.num_small_sian != 0)
+//                    src += String.format("  %-2s  小",p.num_small_sian);
+//            }else{
+//                if (p.num_small_sian != 0) {
+//                    src+=String.format("           %-2s  小",p.num_small_sian);
+//                }
+//            }
+            viewHolder.mSian.setText(src);
         }
 
 //        viewHolder.mImageView.setImageDrawable(mContext.getDrawable(p.getImageResourceId(mContext)));
