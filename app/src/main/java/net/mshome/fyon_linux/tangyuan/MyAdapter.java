@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.nio.Buffer;
 import java.util.List;
 
@@ -57,32 +59,25 @@ public class MyAdapter
         {
             String src = "鹹湯圓     ";
             if (p.num_big_sian != 0)
-                src += String.format("%-2s  大", p.num_big_sian);
+                src += String.format("  %-2s  大", p.num_big_sian);
             else
                 src += String.format("           ");
 
             if (p.num_small_sian != 0)
                   src += String.format("  %-2s  小",p.num_small_sian);
             else
-                  src += String.format("        ");
+                  src += String.format("          ");
 
             if (p.num_nama_sian != 0)
                 src += String.format("  %-2s  盒",p.num_nama_sian);
             else
-                src += String.format("        ");
+                src += String.format("          ");
 
-//            String src = "鹹湯圓     ";
-//            if (p.num_big_sian != 0) {
-//                src += String.format("%-2s  大",p.num_big_sian);
-//                if (p.num_small_sian != 0)
-//                    src += String.format("  %-2s  小",p.num_small_sian);
-//            }else{
-//                if (p.num_small_sian != 0) {
-//                    src+=String.format("           %-2s  小",p.num_small_sian);
-//                }
-//            }
+
             viewHolder.mSian.setText(src);
         }
+
+        viewHolder.mTotalPrice.setText("總價："+String.valueOf(p.total_price));
 
 //        viewHolder.mImageView.setImageDrawable(mContext.getDrawable(p.getImageResourceId(mContext)));
     }
@@ -100,6 +95,7 @@ public class MyAdapter
     {
         public TextView mTextView,mSian;
         public CardView mCardView;
+        public TextView mTotalPrice;
 
         //public ImageView mImageView;
 
@@ -109,6 +105,7 @@ public class MyAdapter
             mTextView = (TextView) v.findViewById(R.id.name);
             mCardView = (CardView) v.findViewById(R.id.cardview);
             mSian = (TextView) v.findViewById(R.id.sian);
+            mTotalPrice = (TextView) v.findViewById(R.id.cardview_totalprice);
            // mImageView = (ImageView) v.findViewById(R.id.pic);
         }
     }

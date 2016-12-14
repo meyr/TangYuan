@@ -12,7 +12,7 @@ public class Actor implements Parcelable
     String name;
     String picName;
     boolean inout;
-    int num_big_sian, num_small_sian,num_nama_sian;
+    int num_big_sian, num_small_sian,num_nama_sian, total_price;
 
     public Actor(){};
 
@@ -21,6 +21,11 @@ public class Actor implements Parcelable
     protected Actor(Parcel in) {
         name = in.readString();
         picName = in.readString();
+    }
+
+    public void setTotal_price(int price)
+    {
+        total_price = price;
     }
 
     public void setSian(int big, int small, int nama)

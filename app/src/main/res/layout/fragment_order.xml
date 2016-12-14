@@ -14,6 +14,7 @@
             android:id="@+id/inout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -22,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="true"
+                android:textSize="30dp"
                 android:text="@string/indoor_chinese" />
 
             <RadioButton
@@ -29,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="30dp"
                 android:text="@string/takeout_chinese" />
         </RadioGroup>
 
@@ -43,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="鹹湯圓"
-                android:textSize="20dp" />
+                android:textSize="24dp" />
 
             <TextView
                 android:id="@+id/sian_big"
@@ -51,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="大"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/sian_big_num"
@@ -59,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/sian_big_pls_btn"
@@ -67,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="＋"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/sian_big_mns_btn"
@@ -75,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="－"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
             　　　　
         </LinearLayout>
 
@@ -90,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="鹹湯圓"
-                android:textSize="20dp"
+                android:textSize="30dp"
                 android:visibility="invisible" />
 
             <TextView
@@ -100,7 +103,7 @@
                 android:layout_below="@+id/sian_big"
                 android:layout_weight="1"
                 android:text="小"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/sian_small_num"
@@ -108,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/sian_small_pls_btn"
@@ -116,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="＋"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/sian_small_mns_btn"
@@ -124,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="－"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -137,8 +140,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="生湯圓(盒)  "
-                android:textSize="20dp" />
+                android:text="生湯圓(盒)"
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/sian_nama_num"
@@ -146,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="0"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/sian_nama_pls_btn"
@@ -154,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="＋"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/sian_nama_mns_btn"
@@ -162,33 +165,37 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="－"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
         </LinearLayout>
     </LinearLayout>
 
 
-<LinearLayout
-android:layout_above="@+id/addOrder"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="總價 : "
-    android:textSize="20dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addOrder"
+        android:orientation="horizontal">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/totalprice"
-    android:text="0"
-    android:textSize="20dp" />
-</LinearLayout><Button
-android:id="@+id/addOrder"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_alignParentBottom="true"
-android:text="add" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="總價 : "
+            android:textSize="30dp" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/totalprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="送出"
+        android:textSize="36dp" />
+
+</RelativeLayout>

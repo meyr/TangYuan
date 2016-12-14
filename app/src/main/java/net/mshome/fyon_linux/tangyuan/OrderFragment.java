@@ -48,6 +48,7 @@ public class OrderFragment extends Fragment {
                 int num_small_sian = Integer.parseInt(sian_small_num.getText().toString());
                 int num_nama_sian = Integer.parseInt(sian_nama_num.getText().toString());
                 act.setSian(num_big_sian,num_small_sian,num_nama_sian);
+                act.setTotal_price(Integer.parseInt(totalprice.getText().toString()));
                 sian_big_num.setText("0");
                 sian_small_num.setText("0");
                 totalprice.setText("0");
