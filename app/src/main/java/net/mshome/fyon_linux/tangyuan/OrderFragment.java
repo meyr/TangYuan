@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.w3c.dom.Text;
 
 /**
@@ -24,6 +25,7 @@ public class OrderFragment extends Fragment {
     private int sian_big_price = 50;
     private int sian_small_price = 40;
     private int sian_nama_price = 130;
+
 
     public interface OrderListener{
         public void addOrder(Actor actor);
@@ -53,8 +55,10 @@ public class OrderFragment extends Fragment {
                 sian_small_num.setText("0");
                 totalprice.setText("0");
                 sian_nama_num.setText("0");
-                if(num_big_sian != 0 || num_small_sian != 0 || num_nama_sian != 0)
+                if(num_big_sian != 0 || num_small_sian != 0 || num_nama_sian != 0) {
                     activityCallback.addOrder(act);
+                    EventBus.getDefault().post(new updateNumber(act,true));
+                }
             }
         });
         sian_big_num = (TextView) rootView.findViewById(R.id.sian_big_num);

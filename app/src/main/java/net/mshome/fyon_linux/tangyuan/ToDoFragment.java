@@ -5,9 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -22,12 +29,15 @@ public class ToDoFragment
     private RecyclerView mRecyclerView;
     private MyAdapter myAdapter;
     private ArrayList<Actor> actors = new ArrayList<>();
+    private TextView totalNum;
+    private int cooked_num, raw_num;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_todo, container, false);
 
+        totalNum = (TextView) rootView.findViewById(R.id.text_seperate_num);
         // 拿到RecyclerView
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.list);
         // 设置LinearLayoutManager
@@ -58,6 +68,7 @@ public class ToDoFragment
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions){
+                                    EventBus.getDefault().post(new updateNumber(actors.get(position),false));
                                     actors.remove(position);
                                     //actors.remove(position);
                                     myAdapter.notifyItemRemoved(position);
@@ -70,6 +81,7 @@ public class ToDoFragment
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions){
+                                    EventBus.getDefault().post(new updateNumber(actors.get(position),false));
                                     actors.remove(position);
                                     //actors.remove(position);
                                     myAdapter.notifyItemRemoved(position);
@@ -82,6 +94,18 @@ public class ToDoFragment
         mRecyclerView.addOnItemTouchListener(swipeTouchListener);
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -105,5 +129,17 @@ public class ToDoFragment
             //actors.add(new Actor(names[myAdapter.getItemCount()], pics[myAdapter.getItemCount()]));
             //mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
             myAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(updateNumber event){
+        if(event.act) {
+            cooked_num += event.actor.num_big_sian * 8 + event.actor.num_small_sian * 6;
+            raw_num += event.actor.num_nama_sian * 24;
+        }else{
+            cooked_num -= event.actor.num_big_sian * 8 + event.actor.num_small_sian * 6;
+            raw_num -= event.actor.num_nama_sian * 24;
+        }
+        totalNum.setText("（熟）　" + cooked_num + "（生）　" + raw_num);
     }
 }

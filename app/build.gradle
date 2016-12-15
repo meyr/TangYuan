@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:support-v4:24.0.+'
     compile 'com.android.support:cardview-v7:24.+'
     compile 'com.android.support:recyclerview-v7:24.+'
+    compile files('/home/fyon/AndroidStudioProjects/Tangyuan/Libs/eventbus-3.0.0.jar')
 }
