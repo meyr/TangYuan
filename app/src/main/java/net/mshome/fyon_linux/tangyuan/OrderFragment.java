@@ -53,7 +53,8 @@ public class OrderFragment extends Fragment {
                 sian_small_num.setText("0");
                 totalprice.setText("0");
                 sian_nama_num.setText("0");
-                activityCallback.addOrder(act);
+                if(num_big_sian != 0 || num_small_sian != 0 || num_nama_sian != 0)
+                    activityCallback.addOrder(act);
             }
         });
         sian_big_num = (TextView) rootView.findViewById(R.id.sian_big_num);
