@@ -100,6 +100,7 @@ public class ToDoFragment
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        setNumber(cooked_num, raw_num);
     }
 
     @Override
@@ -114,12 +115,16 @@ public class ToDoFragment
         // restore arraylist
         if(savedInstanceState != null){
             actors = savedInstanceState.getParcelableArrayList("ACTORS");
+            cooked_num =  savedInstanceState.getInt("cooked_num");
+            raw_num = savedInstanceState.getInt("raw_num");
         }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList("ACTORS", actors);
+        outState.putInt("cooked_num", cooked_num);
+        outState.putInt("raw_num", raw_num);
         super.onSaveInstanceState(outState);
     }
 
@@ -131,6 +136,14 @@ public class ToDoFragment
             myAdapter.notifyDataSetChanged();
     }
 
+
+    private void setNumber(int cnum, int rnum)
+    {
+        totalNum.setText("（熟）" + cnum +
+                "（生）" + rnum +
+                "（共）" + (cnum +rnum));
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(updateNumber event){
         if(event.act) {
@@ -140,6 +153,6 @@ public class ToDoFragment
             cooked_num -= event.actor.num_big_sian * 8 + event.actor.num_small_sian * 6;
             raw_num -= event.actor.num_nama_sian * 24;
         }
-        totalNum.setText("（熟）　" + cooked_num + "（生）　" + raw_num);
+        setNumber(cooked_num, raw_num);
     }
 }
